@@ -19,21 +19,25 @@ models:
         description: "Description of the airplane type"
         meta:
           dbt_type: string
-  
+
   - name: airplane_dim
     columns:
       - name: airplane_id
+        description: "Identifier for the airplane"
         tests:
-          - not_null
+          - unique
+        meta:
+          dbt_type: int
       - name: capacity
-        tests:
-          - not_null
+        description: "Description of the airplane capacity"
+        meta:
+          dbt_type: int
       - name: type_id
+        description: "Description of the airplane type"
+        meta:
+          dbt_type: int
         tests:
           - not_null
           - foreign_key:
               to: airplane_type_dim.type_id
-    meta:
-      primary_key: airplane_id
-    description: 'Dimension table for airplane information.'
-
+      

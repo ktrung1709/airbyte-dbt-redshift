@@ -2,7 +2,7 @@
     materialized='table',
 ) }}
 
-with source_data as (
+with airplane_source as (
     select
         airplane_id, 
         capacity,
@@ -12,4 +12,4 @@ with source_data as (
 )
 
 select *
-from source_data
+from airplane_source

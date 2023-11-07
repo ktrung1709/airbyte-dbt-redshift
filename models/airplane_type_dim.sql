@@ -3,7 +3,7 @@
     materialized='table',
 ) }}
 
-with source_data as (
+with airplane_type_source as (
     select
         type_id, 
         identifier,
@@ -12,4 +12,4 @@ with source_data as (
 )
 
 select *
-from source_data
+from airplane_type_source
