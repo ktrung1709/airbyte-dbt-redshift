@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: airplane_type_dim
+  - name: load_dim_1
     columns:
       - name: type_id
         description: "Unique identifier for the airplane type"
