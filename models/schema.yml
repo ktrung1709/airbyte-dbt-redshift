@@ -39,5 +39,5 @@ models:
         tests:
           - not_null
           - foreign_key:
-            to: "{{ ref('airplane_type_dim') }}.type_id"
+              to: "{{ ref('airplane_type_dim') }}.type_id"
       
