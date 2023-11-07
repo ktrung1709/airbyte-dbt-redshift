@@ -1,5 +1,5 @@
 {{ config(
-    materialized='table',
+    materialized='table'
 ) }}
 
 with airplane_source as (
