@@ -1,7 +1,4 @@
--- models/airplane_type_dim.sql
-{{ config(
-    materialized='table'
-) }}
+{{ config(materialized='table') }}
 
 with airplane_type_source as (
     select
