@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: airplane_type_dim
+    columns:
+      - name: type_id
+        description: "Unique identifier for the airplane type"
+        tests:
+          - unique
+        meta:
+          dbt_type: int
+      - name: identifier
+        description: "Identifier for the airplane type"
+        tests:
+          - unique
+        meta:
+          dbt_type: string
+      - name: description
+        description: "Description of the airplane type"
+        meta:
+          dbt_type: string
+
