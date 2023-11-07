@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: load_dim_1
+  - name: airplane_type_dim
     columns:
       - name: type_id
         description: "Unique identifier for the airplane type"
@@ -19,4 +19,21 @@ models:
         description: "Description of the airplane type"
         meta:
           dbt_type: string
+  
+  - name: airplane_dim
+    columns:
+      - name: airplane_id
+        tests:
+          - not_null
+      - name: capacity
+        tests:
+          - not_null
+      - name: type_id
+        tests:
+          - not_null
+          - foreign_key:
+              to: airplane_type_dim.type_id
+    meta:
+      primary_key: airplane_id
+    description: 'Dimension table for airplane information.'
 
