@@ -65,8 +65,4 @@ models:
           dbt_type: string
       - name: latitude
       - name: longitude
-      - name: geolocation
-        
-
-        
-      
+      - name: geolocation  

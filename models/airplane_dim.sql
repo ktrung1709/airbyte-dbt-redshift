@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='table', schema='bi') }}
 
 with airplane_source as (
     select
