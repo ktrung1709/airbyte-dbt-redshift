@@ -41,31 +41,31 @@ models:
           - foreign_key:
               to: "{{ ref('airplane_type_dim') }}.type_id"
     
-    - name: airport_dim
-      columns:
-        - name: airport_id
-          tests:
-            - unique
-          meta:
-            dbt_type: int
-        - name: iata
-          meta:
-            dbt_type: string
-        - name: icao
-          meta:
-            dbt_type: string
-        - name: name
-          meta:
-            dbt_type: string
-        - name: city
-          meta:
-            dbt_type: string
-        - name: country
-          meta:
-            dbt_type: string
-        - name: latitude
-        - name: longitude
-        - name: geolocation
+  - name: airport_dim
+    columns:
+      - name: airport_id
+        tests:
+          - unique
+        meta:
+          dbt_type: int
+      - name: iata
+        meta:
+          dbt_type: string
+      - name: icao
+        meta:
+          dbt_type: string
+      - name: name
+        meta:
+          dbt_type: string
+      - name: city
+        meta:
+          dbt_type: string
+      - name: country
+        meta:
+          dbt_type: string
+      - name: latitude
+      - name: longitude
+      - name: geolocation
         
 
         
