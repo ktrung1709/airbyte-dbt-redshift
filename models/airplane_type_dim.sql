@@ -1,5 +1,3 @@
-{{ config(materialized='table', schema='bi') }}
-
 with airplane_type_source as (
     select
         type_id, 

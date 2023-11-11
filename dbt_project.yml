@@ -33,4 +33,4 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   airport_analysis:
     +materialized: table
-    
+    +schema: bi
