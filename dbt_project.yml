@@ -34,3 +34,8 @@ models:
   airport_analysis:
     +materialized: table
     +schema: bi
+
+seeds:
+  airport_analysis:
+    +materialized: table
+    +schema: bi

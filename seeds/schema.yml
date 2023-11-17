@@ -1,0 +1,13 @@
+version: 2
+
+seeds:
+  - name: CoS_dim
+    config:
+      column_types:
+        id: int
+        class: varchar(50)
+        mileage_accrual: int
+    columns:
+      - name: id
+      - name: class
+      - name: mileage_accrual
