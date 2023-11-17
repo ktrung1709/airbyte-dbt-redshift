@@ -61,7 +61,3 @@ models:
         data_type: decimal(11,8)
         constraints:
           - type: not_null
-      - name: geolocation
-        data_type: point
-        constraints:
-          - type: not_null
