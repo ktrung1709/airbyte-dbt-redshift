@@ -37,5 +37,5 @@ models:
 
 seeds:
   airport_analysis:
-    +materialized: table
+    +materialized: seed
     +schema: bi
