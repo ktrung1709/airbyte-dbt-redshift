@@ -42,7 +42,7 @@ models:
       - name: iata
         data_type: char(3)
       - name: icao
-        data_type: char(3)
+        data_type: char(4)
         constraints:
           - type: not_null
       - name: name
