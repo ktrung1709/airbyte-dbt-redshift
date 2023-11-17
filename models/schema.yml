@@ -61,3 +61,48 @@ models:
         data_type: decimal(11,8)
         constraints:
           - type: not_null
+
+  - name: passenger_dim
+    constraints:
+      - type: primary_key
+        columns: passenger_id
+    columns:
+      - name: passportno
+        data_type: char(9)
+        constraints:
+          - type: not_null
+          - type: unique
+      - name: firstname
+        data_type: varchar(100)
+        constraints:
+          - type: not_null
+      - name: lastname
+        data_type: varchar(100)
+        constraints:
+          - type: not_null
+      - name: birthdate
+        data_type: date
+        constraints:
+          - type: not_null
+      - name: sex
+        data_type: char(1)
+      - name: street
+        data_type: varchar(100)
+        constraints:
+          - type: not_null
+      - name: city
+        data_type: varchar(100)
+        constraints:
+          - type: not_null
+      - name: zip
+        data_type: int
+        constraints:
+          - type: not_null
+      - name: country
+        data_type: varchar(100)
+        constraints:
+          - type: not_null
+      - name: emailaddress
+        data_type: varchar(120)
+      - name: telephoneno
+        data_type: varchar(30)
