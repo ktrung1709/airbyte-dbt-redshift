@@ -2,67 +2,66 @@ version: 2
 
 models:
   - name: airplane_type_dim
+    constraints:
+      - type: primary_key
+        columns: type_id
     columns:
       - name: type_id
-        description: "Unique identifier for the airplane type"
-        tests:
-          - unique
-        meta:
-          dbt_type: int
+        data_type: int
       - name: identifier
-        description: "Identifier for the airplane type"
-        tests:
-          - unique
-        meta:
-          dbt_type: string
+        data_type: varchar(50)
       - name: description
-        description: "Description of the airplane type"
-        meta:
-          dbt_type: string
+        data_type: text
 
   - name: airplane_dim
+    constraints:
+      - type: primary_key
+        columns: airplane_id
     columns:
       - name: airplane_id
-        description: "Identifier for the airplane"
-        tests:
-          - unique
-        meta:
-          dbt_type: int
+        data_type: int
       - name: capacity
-        description: "Description of the airplane capacity"
-        meta:
-          dbt_type: int
+        data_type: int
+        constraints:
+          - type: not_null
       - name: type_id
-        description: "Description of the airplane type"
-        meta:
-          dbt_type: int
-        tests:
-          - not_null
-          - foreign_key:
-              to: "{{ ref('airplane_type_dim') }}.type_id"
+        data_type: int
+        constraints:
+          - type: not_null
+          - type: unique
+          - type: foreign_key
+            expression: public_bi.airplane_type_dim (type_id)
     
   - name: airport_dim
+    constraints:
+      - type: primary_key
+        columns: airport_id
     columns:
       - name: airport_id
-        tests:
-          - unique
-        meta:
-          dbt_type: int
+        data_type: int
       - name: iata
-        meta:
-          dbt_type: string
+        data_type: char(3)
       - name: icao
-        meta:
-          dbt_type: string
+        data_type: char(3)
+        constraints:
+          - type: not_null
       - name: name
-        meta:
-          dbt_type: string
+        data_type: varchar(50)
+        constraints:
+          - type: not_null
       - name: city
-        meta:
-          dbt_type: string
+        data_type: varchar(50)
       - name: country
-        meta:
-          dbt_type: string
+        data_type: varchar(50)
       - name: latitude
+        data_type: decimal(11,8)
+        constraints:
+          - type: not_null
       - name: longitude
-      - name: geolocation  
+        data_type: decimal(11,8)
+        constraints:
+          - type: not_null
+      - name: geolocation
+        data_type: point
+        constraints:
+          - type: not_null
