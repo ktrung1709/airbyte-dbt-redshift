@@ -1,6 +1,6 @@
 {% macro generate_dates_dimension (start_date) %}
 WITH RECURSIVE dates AS (
-  SELECT CAST('{{ start_date }}' AS DATE) AS 'date'
+  SELECT CAST('{{ start_date }}' AS DATE) AS date
   UNION ALL
   SELECT dbt_utils.dateadd(day, 1, d.date)
   FROM dates d
