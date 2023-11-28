@@ -1,0 +1,1 @@
+{{ generate_date_dim() }}
