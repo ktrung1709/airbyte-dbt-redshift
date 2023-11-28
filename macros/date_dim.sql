@@ -5,7 +5,7 @@ WITH RECURSIVE dates AS (
   SELECT dbt_utils.dateadd(day, 1, date)
   FROM dates
   WHERE date < dbt_utils.dateadd(month, 12, dbt_date.today())
-  SELECT date AS Carlendar_Date,s
+  SELECT date AS Carlendar_Date,
          EXTRACT(DAYOFWEEK FROM date) as Day_Of_Week,
          DATE_FORMAT(date, '%a') as Day_Of_Week_Name,
          DATE_TRUNC(date, 'WEEK') AS Cal_Week_Start_Date, --Monday Start
