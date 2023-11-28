@@ -20,9 +20,6 @@
         from 
             date_series
     )
-    insert into date_dim
-    select 
-        *
-    from 
-        date_parts
+    select *
+    from date_parts
 {% endmacro %}
