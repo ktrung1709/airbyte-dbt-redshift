@@ -1,11 +1,7 @@
 {% macro generate_dates_dimension (start_date) %}
-WITH RecursiveDates (DateValue) AS (
-    -- Anchor member
-    SELECT CAST('2015-01-01' AS DATE) AS DateValue
-
+WITH RECURSIVE RecursiveDates (DateValue) AS (
+    SELECT CAST('{{ start_date }}' AS DATE) AS DateValue
     UNION ALL
-
-    -- Recursive member
     SELECT DATEADD(day, 1, DateValue)
     FROM RecursiveDates
     WHERE DATEADD(day, 1, DateValue) <= GETDATE()
