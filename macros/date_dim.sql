@@ -13,7 +13,7 @@ WITH RECURSIVE RecursiveDates (DateValue) AS (
   SELECT d1.DateValue AS "Date",
          extract(year from d1.DateValue) as "Year",
          extract(quarter from d1.DateValue) AS "Quarter",
-         concat(cast(extract(year from d1.DateValue) as text), 'Q',cast(EXTRACT(quarter FROM d1.DateValue) as text)) AS QuarterID,
+         concat(cast(extract(year from d1.DateValue) as text), cast('Q' as text),cast(EXTRACT(quarter FROM d1.DateValue) as text)) AS QuarterID,
          extract(month from d1.DateValue) AS "Month",
          concat(cast(extract(year from d1.DateValue) as text), cast(EXTRACT(month FROM d1.DateValue) as text)) AS MonthID,
          dbt_date.month_name(d1.DateValue) AS MonthName,
