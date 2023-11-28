@@ -1,10 +1,17 @@
 {% macro generate_dates_dimension (start_date) %}
-WITH RECURSIVE dates AS (
-  SELECT '{{ start_date }}' as "date"
-  UNION ALL
-  SELECT cast(dateadd(day, 1, d."date") as date)
-  FROM dates d
-  WHERE d."date" < dbt_date.today())
+WITH RecursiveDates (DateValue) AS (
+    -- Anchor member
+    SELECT CAST('2015-01-01' AS DATE) AS DateValue
+
+    UNION ALL
+
+    -- Recursive member
+    SELECT DATEADD(day, 1, DateValue)
+    FROM RecursiveDates
+    WHERE DATEADD(day, 1, DateValue) <= GETDATE()
+)
+SELECT * FROM RecursiveDates;
+
 --   , 
 --   dates_fin AS (
 --   SELECT d1.date AS Carlendar_Date,
@@ -46,5 +53,5 @@ WITH RECURSIVE dates AS (
 --        CONCAT ('FQ',Fin_Quarter) AS Fin_Quarter_Name,
 --        CONCAT ('wk',Fin_Week) AS Fin_Week_Name
 -- FROM dates_fin
-select * from dates
+-- select * from dates
 {% endmacro %}
