@@ -4,7 +4,7 @@ WITH RECURSIVE dates AS (
   UNION ALL
   SELECT dbt_utils.dateadd(day, 1, d.date)
   FROM dates d
-  WHERE date < dbt_utils.dateadd(month, 12, dbt_date.today())), dates_fin AS (
+  WHERE d.date < dbt_utils.dateadd(month, 12, dbt_date.today())), dates_fin AS (
   SELECT d1.date AS Carlendar_Date,
          EXTRACT(DAYOFWEEK FROM d1.date) as Day_Of_Week,
          DATE_FORMAT(d1.date, '%a') as Day_Of_Week_Name,
@@ -33,7 +33,7 @@ WITH RECURSIVE dates AS (
            THEN EXTRACT(quarter FROM d1.date) + 2
            ELSE EXTRACT(quarter FROM d1.date) - 2
          END AS Fin_Quarter,
-         CASE WHEN date < date_trunc(d1.date, 'year') + interval '6 months'
+         CASE WHEN d1.date < date_trunc(d1.date, 'year') + interval '6 months'
            THEN EXTRACT(WEEK FROM (d1.date - interval '6 months'))::integer
            ELSE EXTRACT(WEEK FROM (d1.date + interval '6 months'))::integer
          END AS Fin_Week
