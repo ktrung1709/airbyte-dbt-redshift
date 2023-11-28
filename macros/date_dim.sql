@@ -1,10 +1,10 @@
 {% macro generate_dates_dimension (start_date) %}
 WITH RECURSIVE dates AS (
-  SELECT CAST('{{ start_date }}' AS DATE) AS date
+  SELECT CAST('{{ start_date }}' AS DATE) AS "date"
   UNION ALL
-  SELECT dbt_utils.dateadd(day, 1, d.date)
+  SELECT dbt_utils.dateadd(day, 1, d."date")
   FROM dates d
-  WHERE d.date < dbt_utils.dateadd(month, 12, dbt_date.today()))
+  WHERE d."date" < dbt_utils.dateadd(month, 12, dbt_date.today()))
 --   , 
 --   dates_fin AS (
 --   SELECT d1.date AS Carlendar_Date,
