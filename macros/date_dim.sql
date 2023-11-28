@@ -10,7 +10,7 @@ WITH RecursiveDates (DateValue) AS (
     FROM RecursiveDates
     WHERE DATEADD(day, 1, DateValue) <= GETDATE()
 )
-SELECT * FROM RecursiveDates;
+SELECT * FROM RecursiveDates
 
 --   , 
 --   dates_fin AS (
