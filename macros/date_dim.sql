@@ -4,7 +4,7 @@ WITH RECURSIVE dates AS (
   UNION ALL
   SELECT dbt_utils.dateadd(day, 1, d."date")
   FROM dates d
-  WHERE d."date" < dbt_date.today()
+  WHERE d."date" < dbt_date.today())
 --   , 
 --   dates_fin AS (
 --   SELECT d1.date AS Carlendar_Date,
