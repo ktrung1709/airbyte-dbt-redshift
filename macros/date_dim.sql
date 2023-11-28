@@ -2,8 +2,8 @@
 WITH RECURSIVE dates AS (
   SELECT CAST('{{ start_date }}' AS DATE) AS date
   UNION ALL
-  SELECT dbt_utils.dateadd(day, 1, date)
-  FROM dates
+  SELECT dbt_utils.dateadd(day, 1, d.date)
+  FROM dates d
   WHERE date < dbt_utils.dateadd(month, 12, dbt_date.today())), dates_fin AS (
   SELECT date AS Carlendar_Date,
          EXTRACT(DAYOFWEEK FROM date) as Day_Of_Week,
