@@ -2,9 +2,9 @@
 WITH RECURSIVE dates AS (
   SELECT CAST('{{ start_date }}' AS DATE) AS date
   UNION ALL
-  SELECT date + INTERVAL 1 DAY
+  SELECT date_add(date, INTERVAL 1 DAY)
   FROM dates
-  WHERE date < CURRENT_DATE() + INTERVAL 12 MONTH
+  WHERE date < date_add(CURRENT_DATE(), INTERVAL 12 MONTH)
 ), dates_fin AS (
   SELECT date AS Carlendar_Date,s
          EXTRACT(DAYOFWEEK FROM date) as Day_Of_Week,
