@@ -1,10 +1,11 @@
 {% macro generate_dates_dimension (start_date) %}
 WITH RECURSIVE dates AS (
-  SELECT CAST('{{ start_date }}' AS DATE) AS date
+  SELECT CAST('{{ start_date }}' AS DATE) AS 'date'
   UNION ALL
   SELECT dbt_utils.dateadd(day, 1, d.date)
   FROM dates d
-  WHERE d.date < dbt_utils.dateadd(month, 12, dbt_date.today())), dates_fin AS (
+  WHERE d.date < dbt_utils.dateadd(month, 12, dbt_date.today())), 
+  dates_fin AS (
   SELECT d1.date AS Carlendar_Date,
          EXTRACT(DAYOFWEEK FROM d1.date) as Day_Of_Week,
          DATE_FORMAT(d1.date, '%a') as Day_Of_Week_Name,
@@ -25,7 +26,7 @@ WITH RECURSIVE dates AS (
            THEN EXTRACT(YEAR FROM d1.date)
            ELSE EXTRACT(YEAR FROM d1.date) + 1
          END AS Fin_Year,
-         CASE WHEN EXTRACT(MONTH FROM date) < 7
+         CASE WHEN EXTRACT(MONTH FROM d1.date) < 7
            THEN EXTRACT(MONTH FROM d1.date) + 6
            ELSE EXTRACT(MONTH FROM d1.date) - 6
          END AS Fin_Period,
