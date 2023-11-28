@@ -1,20 +1,19 @@
 {% macro generate_dates_dimension (start_date) %}
-/* - Assuming start of fiscal year as at 1st of July.
-   - Automatically calculate the date that is 10,000 days after the start date.
-   - Filter the end date as 12 month after today. */
-WITH dates AS (
-  SELECT DATEADD (day, SEQ4 (), '{{ start_date }}'::DATE) AS date
-  FROM TABLE(GENERATOR (ROWCOUNT => 10000))
-), dates_fin AS(
-  -- add fiscal dates
+WITH RECURSIVE dates AS (
+  SELECT CAST('{{ start_date }}' AS DATE) AS date
+  UNION ALL
+  SELECT date + INTERVAL 1 DAY
+  FROM dates
+  WHERE date < CURRENT_DATE() + INTERVAL 12 MONTH
+), dates_fin AS (
   SELECT date AS Carlendar_Date,
          EXTRACT(DAYOFWEEK FROM date) as Day_Of_Week,
-         TO_CHAR (date,'DY') as Day_Of_Week_Name,
-         DATE_TRUNC ('WEEK', date) AS Cal_Week_Start_Date, --Monday Start
+         DATE_FORMAT(date, '%a') as Day_Of_Week_Name,
+         DATE_TRUNC(date, 'WEEK') AS Cal_Week_Start_Date, --Monday Start
          EXTRACT(DAY FROM date) AS Day_Of_Month,
          EXTRACT(MONTH FROM date) AS Cal_Month,
-         TO_CHAR (date,'MMMM') AS Cal_Mon_Name,
-         TO_CHAR (date,'MON') AS Cal_Mon_Name_Short,
+         DATE_FORMAT(date, '%M') AS Cal_Mon_Name,
+         DATE_FORMAT(date, '%b') AS Cal_Mon_Name_Short,
          EXTRACT(quarter FROM date) AS Cal_Quarter,
          CONCAT ('Q',EXTRACT(quarter FROM date)) AS Cal_Quarter_Name,
          EXTRACT(year FROM date) AS Cal_Year,
@@ -35,12 +34,11 @@ WITH dates AS (
            THEN EXTRACT(quarter FROM date) + 2
            ELSE EXTRACT(quarter FROM date) - 2
          END AS Fin_Quarter,
-         CASE WHEN date < date_trunc ('year', date) + interval '6 months'
+         CASE WHEN date < date_trunc(date, 'year') + interval '6 months'
            THEN EXTRACT(WEEK FROM (date - interval '6 months'))::integer
            ELSE EXTRACT(WEEK FROM (date + interval '6 months'))::integer
          END AS Fin_Week
   FROM dates
-  WHERE date >= '2015-01-01' AND date <= DATEADD (MONTH, 12, CURRENT_DATE()) -- including 12 months in the future for forecasting purpose
 )
 SELECT *,
        CONCAT ('p',Fin_Period) AS Fin_Period_Name,
