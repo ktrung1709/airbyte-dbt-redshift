@@ -16,10 +16,10 @@ WITH RECURSIVE RecursiveDates (DateValue) AS (
          cast(extract(year from d1.DateValue) as text) || cast('Q' as text) || cast(EXTRACT(quarter FROM d1.DateValue) as text) AS QuarterID,
          extract(month from d1.DateValue) AS "Month",
          cast(extract(year from d1.DateValue) as text) || cast(EXTRACT(month FROM d1.DateValue) as text) AS MonthID,
-         month_name(d1.DateValue) AS MonthName,
+         monthname(d1.DateValue) AS MonthName,
          dayofweek(d1.DateValue) as DayOfWeek,
-         day_of_month(d1.DateValue) AS DayOfMonth,
-         day_name(d1.DateValue) AS DayName
+         dayofmonth(d1.DateValue) AS DayOfMonth,
+         dayname(d1.DateValue) AS DayName
          
   FROM RecursiveDates d1
 )
