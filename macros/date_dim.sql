@@ -10,38 +10,17 @@ WITH RECURSIVE RecursiveDates (DateValue) AS (
 
   , 
   dates_fin AS (
-  SELECT d1.DateValue AS Carlendar_Date,
-         EXTRACT(DAYOFWEEK FROM d1.DateValue) as Day_Of_Week,
-         DATE_FORMAT(d1.DateValue, '%a') as Day_Of_Week_Name,
-         DATE_TRUNC(d1.DateValue, 'WEEK') AS Cal_Week_Start_Date, --Monday Start
-         EXTRACT(DAY FROM d1.DateValue) AS Day_Of_Month,
-         EXTRACT(MONTH FROM d1.DateValue) AS Cal_Month,
-         DATE_FORMAT(d1.DateValue, '%M') AS Cal_Mon_Name,
-         DATE_FORMAT(d1.DateValue, '%b') AS Cal_Mon_Name_Short,
-         EXTRACT(quarter FROM d1.DateValue) AS Cal_Quarter,
-         CONCAT ('Q',EXTRACT(quarter FROM d1.DateValue)) AS Cal_Quarter_Name,
-         EXTRACT(year FROM d1.DateValue) AS Cal_Year,
-         CASE EXTRACT(DAYOFWEEK FROM d1.DateValue)
-           WHEN 6 THEN TRUE
-           WHEN 7 THEN TRUE
-           ELSE FALSE
-         END AS Is_Weekend,
-         CASE WHEN EXTRACT(MONTH FROM d1.DateValue) < 7
-           THEN EXTRACT(YEAR FROM d1.DateValue)
-           ELSE EXTRACT(YEAR FROM d1.DateValue) + 1
-         END AS Fin_Year,
-         CASE WHEN EXTRACT(MONTH FROM d1.DateValue) < 7
-           THEN EXTRACT(MONTH FROM d1.DateValue) + 6
-           ELSE EXTRACT(MONTH FROM d1.DateValue) - 6
-         END AS Fin_Period,
-         CASE WHEN EXTRACT(MONTH FROM d1.DateValue) < 7
-           THEN EXTRACT(quarter FROM d1.DateValue) + 2
-           ELSE EXTRACT(quarter FROM d1.DateValue) - 2
-         END AS Fin_Quarter,
-         CASE WHEN d1.DateValue < date_trunc(d1.DateValue, 'year') + interval '6 months'
-           THEN EXTRACT(WEEK FROM (d1.DateValue - interval '6 months'))::integer
-           ELSE EXTRACT(WEEK FROM (d1.DateValue + interval '6 months'))::integer
-         END AS Fin_Week
+  SELECT d1.DateValue AS "Date",
+         extract(year from d1.DateValue) as "Year",
+         extract(quarter from d1.DateValue) AS "Quarter",
+         CONCAT (extract(year from d1.DateValue), 'Q',EXTRACT(quarter FROM d1.DateValue)) AS QuarterID,
+         extract(month from d1.DateValue) AS "Month",
+         CONCAT (extract(year from d1.DateValue), EXTRACT(month FROM d1.DateValue)) AS MonthID,
+         dbt_date.month_name(d1.DateValue) AS MonthName,
+         dbt_date.day_of_week(d1.DateValue) as DayOfWeek,
+         dbt_date.day_of_month(d1.DateValue) AS DayOfMonth,
+         dbt_date.day_name(d1.DateValue) AS DayName
+         
   FROM RecursiveDates d1
 )
 -- SELECT *,
