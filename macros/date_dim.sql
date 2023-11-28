@@ -4,8 +4,7 @@ WITH RECURSIVE dates AS (
   UNION ALL
   SELECT dbt_utils.dateadd(day, 1, date)
   FROM dates
-  WHERE date < dbt_utils.dateadd(month, 12, CURRENT_DATE())
-), dates_fin AS (
+  WHERE date < dbt_utils.dateadd(month, 12, dbt_date.today())
   SELECT date AS Carlendar_Date,s
          EXTRACT(DAYOFWEEK FROM date) as Day_Of_Week,
          DATE_FORMAT(date, '%a') as Day_Of_Week_Name,
