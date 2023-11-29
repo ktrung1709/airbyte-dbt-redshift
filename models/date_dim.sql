@@ -13,5 +13,5 @@
 --        day_of_week,
 --        day_name
 -- FROM date_dim
--- select * 
--- from {{ ref('date_time') }}
+select * 
+from {{ ref('date_time') }}
