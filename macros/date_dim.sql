@@ -16,7 +16,7 @@ WITH RECURSIVE RecursiveDates (DateValue) AS (
          cast(extract(year from d1.DateValue) as text) || cast('Q' as text) || cast(EXTRACT(quarter FROM d1.DateValue) as text) AS QuarterID,
          extract(month from d1.DateValue) AS "Month",
          cast(extract(year from d1.DateValue) as text) || cast(EXTRACT(month FROM d1.DateValue) as text) AS MonthID,
-         monthname(d1.DateValue) AS "MonthName"
+         TO_CHAR(d1.DateValue, 'Month') AS "MonthName"
         --  dbt_date.day_of_week(d1.DateValue) as DayOfWeek,
         --  dbt_date.day_of_month(d1.DateValue) AS DayOfMonth,
         --  dbt_date.day_name(d1.DateValue) AS DayName
