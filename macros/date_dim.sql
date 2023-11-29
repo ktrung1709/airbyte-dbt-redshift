@@ -2,9 +2,9 @@
 WITH RECURSIVE RecursiveDates (DateValue) AS (
     SELECT CAST('{{ start_date }}' AS DATE) AS DateValue
     UNION ALL
-    SELECT DATEADD(day, 1, DateValue)
+    SELECT CAST(DATEADD(hour, 24, DateValue) AS DATE) AS DateValue
     FROM RecursiveDates
-    WHERE dateValue <= GETDATE()
+    WHERE CAST(dateValue as DATE) <= GETDATE()
 )
 -- SELECT * FROM RecursiveDates
 
