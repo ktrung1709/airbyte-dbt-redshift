@@ -17,5 +17,3 @@ from airplane_type
   where _ab_cdc_updated_at >= (select max(_ab_cdc_updated_at) from {{ this }})
 
 {% endif %}
-
-group by 1
