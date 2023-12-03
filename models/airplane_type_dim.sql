@@ -4,6 +4,10 @@
         unique_key='type_id'
     )
 }}
+
+with max_updated_time as 
+(select max(_ab_cdc_updated_at) from airplane_type)
+
 select
     type_id, 
     identifier,
@@ -14,6 +18,6 @@ from airplane_type
 
   -- this filter will only be applied on an incremental run
   -- (uses >= to include records arriving later on the same day as the last run of this model)
-  where _ab_cdc_updated_at >= (select max(_ab_cdc_updated_at) from {{ this }})
+  where _ab_cdc_updated_at >= max_updated_time
 
 {% endif %}
