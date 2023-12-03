@@ -11,3 +11,16 @@ seeds:
       - name: id
       - name: class
       - name: mileage_accrual
+
+  - name: time_dim
+    config:
+      column_types:
+        id: int
+        hour: int
+        minute: int
+        time_am_or_pm: char(2)
+    columns:
+      - name: id
+      - name: hour
+      - name: minute
+      - name: time_am_or_pm
