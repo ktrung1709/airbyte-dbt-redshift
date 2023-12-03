@@ -1,6 +1,6 @@
 select
     type_id, 
     identifier,
-    "description"
+    "description",
     getdate() as updated_at
 from airplane_type
