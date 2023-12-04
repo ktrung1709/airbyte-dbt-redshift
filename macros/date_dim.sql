@@ -8,7 +8,8 @@ WITH RECURSIVE RecursiveDates (DateValue) AS (
 )
   , 
   dates_fin AS (
-  SELECT d1.DateValue AS "Date",
+  SELECT TO_CHAR(d1.DateValue, 'YYYYMMDD') as "Date ID"
+         d1.DateValue AS "Date",
          extract(year from d1.DateValue) as "Year",
          extract(quarter from d1.DateValue) AS "Quarter",
          cast(extract(year from d1.DateValue) as text) || cast('Q' as text) || cast(EXTRACT(quarter FROM d1.DateValue) as text) AS QuarterID,
@@ -16,7 +17,7 @@ WITH RECURSIVE RecursiveDates (DateValue) AS (
          cast(extract(year from d1.DateValue) as text) || cast(EXTRACT(month FROM d1.DateValue) as text) AS MonthID,
          TO_CHAR(d1.DateValue, 'mon') AS "MonthName",
          date_part(dayofweek, d1.DateValue) as DayOfWeek,
-         TO_CHAR(d1.DateValue, 'Day') as DayName,
+         lower(TO_CHAR(d1.DateValue, 'Day')) as DayName,
          date_part(day, d1.DateValue) AS "DayOfMonth"
          
   FROM RecursiveDates d1
