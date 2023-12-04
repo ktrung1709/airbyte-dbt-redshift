@@ -8,7 +8,7 @@ WITH RECURSIVE RecursiveDates (DateValue) AS (
 )
   , 
   dates_fin AS (
-  SELECT TO_CHAR(d1.DateValue, 'YYYYMMDD') as "Date ID"
+  SELECT TO_CHAR(d1.DateValue, 'YYYYMMDD') as "Date ID",
          d1.DateValue AS "Date",
          extract(year from d1.DateValue) as "Year",
          extract(quarter from d1.DateValue) AS "Quarter",
