@@ -5,7 +5,19 @@
     )
 }}
 
-SELECT p.passenger_id, p.passportno, p.firstname, p.lastname, pd.birthdate, pd.sex, pd.street, pd.city, pd.zip, pd.country, pd.emailaddress, pd.telephoneno
+SELECT  p.passenger_id, 
+        p.passportno, 
+        p.firstname, 
+        p.lastname, 
+        pd.birthdate, 
+        pd.sex, 
+        pd.street, 
+        pd.city, 
+        pd.zip, 
+        pd.country, 
+        pd.emailaddress, 
+        pd.telephoneno,
+        getdate() as updated_at
 FROM passenger p
 INNER JOIN passengerdetails pd
 ON p.passenger_id = pd.passenger_id
