@@ -8,12 +8,12 @@ for hour in range(1, 25):
         if hour < 10:
             temp_id += f'0{hour}'
         else:
-            temp_id += f'0{hour}'
+            temp_id += f'{hour}'
 
         if minute < 10:
             temp_id += f'0{minute}'
         else:
-            temp_id += f'0{minute}'
+            temp_id += f'{minute}'
         time_slots.append({'time_id': temp_id,
                            'hour': hour if hour <= 12 else hour-12,
                            'minute': minute,

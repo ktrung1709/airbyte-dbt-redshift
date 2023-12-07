@@ -15,7 +15,7 @@ seeds:
   - name: time_dim
     config:
       column_types:
-        id: int
+        id: char(4)
         hour: int
         minute: int
         time_am_or_pm: char(2)
