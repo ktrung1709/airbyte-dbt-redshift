@@ -4,7 +4,17 @@ import pandas as pd
 time_slots = []
 for hour in range(1, 25):
     for minute in range(0, 60):
-        time_slots.append({'time_id': len(time_slots) + 1,
+        temp_id = ''
+        if hour < 10:
+            temp_id += f'0{hour}'
+        else:
+            temp_id += f'0{hour}'
+
+        if minute < 10:
+            temp_id += f'0{minute}'
+        else:
+            temp_id += f'0{minute}'
+        time_slots.append({'time_id': temp_id,
                            'hour': hour if hour <= 12 else hour-12,
                            'minute': minute,
                            'time_am_or_pm': 'AM' if hour < 12 else 'PM'})
@@ -13,4 +23,4 @@ for hour in range(1, 25):
 df = pd.DataFrame(time_slots)
 
 # Display the DataFrame
-df.to_csv('seeds/time.csv', index=False)
+df.to_csv('seeds/time_dim.csv', index=False)
