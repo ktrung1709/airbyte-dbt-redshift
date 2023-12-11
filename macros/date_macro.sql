@@ -8,17 +8,17 @@ WITH RECURSIVE RecursiveDates (DateValue) AS (
 )
   , 
   dates_fin AS (
-  SELECT CAST(TO_CHAR(d1.DateValue, 'YYYYMMDD') AS INT) as "Date ID",
-         d1.DateValue AS "Date",
-         extract(year from d1.DateValue) as "Year",
-         extract(quarter from d1.DateValue) AS "Quarter",
-         cast(extract(year from d1.DateValue) as text) || cast('Q' as text) || cast(EXTRACT(quarter FROM d1.DateValue) as text) AS QuarterID,
-         extract(month from d1.DateValue) AS "Month",
-         cast(extract(year from d1.DateValue) as text) || cast(EXTRACT(month FROM d1.DateValue) as text) AS MonthID,
-         TO_CHAR(d1.DateValue, 'mon') AS "MonthName",
-         date_part(dayofweek, d1.DateValue) as DayOfWeek,
-         lower(TO_CHAR(d1.DateValue, 'Day')) as DayName,
-         date_part(day, d1.DateValue) AS "DayOfMonth"
+  SELECT CAST(TO_CHAR(d1.DateValue, 'YYYYMMDD') AS INT) as "date_id",
+         d1.DateValue AS "date",
+         extract(year from d1.DateValue) as "year",
+         extract(quarter from d1.DateValue) AS "quarter",
+         cast(extract(year from d1.DateValue) as text) || cast('Q' as text) || cast(EXTRACT(quarter FROM d1.DateValue) as text) AS quarter_id,
+         extract(month from d1.DateValue) AS "month",
+         cast(extract(year from d1.DateValue) as text) || cast(EXTRACT(month FROM d1.DateValue) as text) AS month_id,
+         TO_CHAR(d1.DateValue, 'mon') AS "month_name",
+         date_part(dayofweek, d1.DateValue) as day_of_week,
+         lower(TO_CHAR(d1.DateValue, 'Day')) as day_name,
+         date_part(day, d1.DateValue) AS "day_of_month"
          
   FROM RecursiveDates d1
 )

@@ -11,7 +11,7 @@ SELECT
     b.passenger_id,
     f.from AS origin_airport_id,
     f.to AS destination_airport_id,
-    f.airline_id,
+    CAST(TO_CHAR(DATE(departure), 'YYYYMMDD') AS INT) as "actual_departure_date_id",
     CASE
         WHEN SUBSTRING(b.seat, 1, 1) IN ('0', '1', '2', '3', '4', '5')
         	AND SUBSTRING(b.seat, 2, 1) NOT IN ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
