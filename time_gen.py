@@ -2,7 +2,7 @@ import pandas as pd
 
 # Define the time slots
 time_slots = []
-for hour in range(1, 25):
+for hour in range(0, 24):
     for minute in range(0, 60):
         temp_id = ''
         if hour < 10:
