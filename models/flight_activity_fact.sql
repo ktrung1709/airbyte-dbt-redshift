@@ -23,10 +23,13 @@ SELECT
     END AS cos_id,
     b.price AS transaction_fee,
     getdate() as updated_at,
-    {{ get_latlong(f.from)}} as miles_flown
+    f.miles_flown
 FROM
     booking_temp b
-INNER JOIN flight f ON b.flight_id = f.flight_id
+INNER JOIN (
+    select *, {{ get_latlong(fl.from) }} as miles_flown
+    from flight fl
+) f ON b.flight_id = f.flight_id
 INNER JOIN flightschedule fs ON f.flightno = fs.flightno
 WHERE
     f.airline_id = 107
