@@ -3,7 +3,7 @@
 {% set query %}
     select latitude, longitude
     from airport_geo
-    where id = {{airport_id}}
+    where airport_id = {{airport_id}}
 
 {% endset %}
 
