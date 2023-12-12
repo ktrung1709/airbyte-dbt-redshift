@@ -44,12 +44,11 @@ SELECT
     b.price AS transaction_fee,
     getdate() as updated_at,
 FROM
-    booking_temp b, fligt f, flightschedule fs, airport_geo ag
+    booking_temp b, fligt f, flightschedule fs
 WHERE
     f.airline_id = 107 and
     b.flight_id = f.flight_id and
-    f.flightno = fs.flightno and 
-    f.from = ag.airport_id
+    f.flightno = fs.flightno
 
 {% if is_incremental() %}
   and
