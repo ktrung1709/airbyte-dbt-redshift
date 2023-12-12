@@ -42,7 +42,7 @@ SELECT
     END AS cos_id,
     b.price AS transaction_fee,
     getdate() as updated_at,
-    {{ get_latlong('flight.from') }} as lat1
+    {{ get_latlong('"flight.from"') }} as lat1
 FROM
     booking_temp b
 INNER JOIN flight f ON b.flight_id = f.flight_id
