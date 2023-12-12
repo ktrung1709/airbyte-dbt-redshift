@@ -44,12 +44,12 @@ SELECT
     b.price AS transaction_fee,
     getdate() as updated_at,
 FROM
-    booking_temp b
-INNER JOIN flight f ON b.flight_id = f.flight_id
-INNER JOIN flightschedule fs ON f.flightno = fs.flightno
-INNER JOIN airport_geo ag ON f.from = ag.airport_id
+    booking_temp b, fligt f, flightschedule fs, airport_geo ag
 WHERE
-    f.airline_id = 107
+    f.airline_id = 107 and
+    b.flight_id = f.flight_id and
+    f.flightno = fs.flightno and 
+    f.from = ag.airport_id
 
 {% if is_incremental() %}
   and
