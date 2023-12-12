@@ -7,7 +7,12 @@
 
 {% endset %}
 
+
+{% if execute %}
 {% set lat = run_query(query).columns[0][0] %}
+{% else %}
+{% set lat = "" %}
+{% endif %}
 {% do return(lat) %}
 
 {% endmacro %}
