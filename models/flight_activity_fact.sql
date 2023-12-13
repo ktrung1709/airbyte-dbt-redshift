@@ -42,6 +42,7 @@ SELECT
     END AS cos_id,
     b.price AS transaction_fee,
     getdate() as updated_at,
+    agf.latitude
     {{ haversine('agf.latitude', 'agf.longitude', 'agt.latitude', 'agt.longitude')}} as miles_flown
 
 FROM
