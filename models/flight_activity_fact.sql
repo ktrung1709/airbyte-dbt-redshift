@@ -5,7 +5,6 @@
     )
 }}
 
-
 SELECT
     b.booking_id,
     f.flightno,
@@ -42,13 +41,14 @@ SELECT
         ELSE 3
     END AS cos_id,
     b.price AS transaction_fee,
-    getdate() as updated_at,
+    getdate() as updated_at
 FROM
-    booking_temp as b, flight as f, flightschedule as fs
+    booking_temp b
+INNER JOIN flight f ON b.flight_id = f.flight_id
+INNER JOIN flightschedule fs ON f.flightno = fs.flightno
+INNER JOIN "public".airport_geo ag ON ag.airport_id = b.from
 WHERE
-    f.airline_id = 107 and
-    b.flight_id = f.flight_id and
-    f.flightno = fs.flightno
+    f.airline_id = 107
 
 {% if is_incremental() %}
   and
