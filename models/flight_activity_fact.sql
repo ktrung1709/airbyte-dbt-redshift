@@ -46,7 +46,7 @@ FROM
     booking_temp b
 INNER JOIN flight f ON b.flight_id = f.flight_id
 INNER JOIN flightschedule fs ON f.flightno = fs.flightno
-INNER JOIN "public".airport_geo ag ON ag.airport_id = b.from
+INNER JOIN "public".airport_geo ag ON ag.airport_id = f.from
 WHERE
     f.airline_id = 107
 
