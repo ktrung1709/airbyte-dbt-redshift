@@ -42,11 +42,11 @@ SELECT
     END AS cos_id,
     b.price AS transaction_fee,
     getdate() as updated_at,
-    
+
     6371 * 2 * ASIN(SQRT(
-    POWER(SIN(({{ lat2 }} - {{ lat1 }}) * pi()/180 / 2), 2) +
-    COS({{ lat1 }} * pi()/180) * COS({{ lat2 }} * pi()/180) *
-    POWER(SIN(({{ lon2 }} - {{ lon1 }}) * pi()/180 / 2), 2)
+    POWER(SIN(({{ agt.latitude }} - {{ agf.latitude }}) * pi()/180 / 2), 2) +
+    COS({{ agf.latitude }} * pi()/180) * COS({{ agt.latitude }} * pi()/180) *
+    POWER(SIN(({{ agt.longitude }} - {{ agf.longitude }}) * pi()/180 / 2), 2)
     )) as miles_flown
 
 FROM
