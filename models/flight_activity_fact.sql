@@ -44,7 +44,7 @@ SELECT
     b.price AS transaction_fee,
     getdate() as updated_at,
 FROM
-    booking_temp b, flight f, flightschedule fs
+    booking_temp as b, flight as f, flightschedule as fs
 WHERE
     f.airline_id = 107 and
     b.flight_id = f.flight_id and
