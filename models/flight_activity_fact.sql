@@ -41,12 +41,15 @@ SELECT
         ELSE 3
     END AS cos_id,
     b.price AS transaction_fee,
-    getdate() as updated_at
+    getdate() as updated_at,
+    {{ haversine(agf.latitude, agf.longitude, agt.latitude, agt.longitude)}} as miles_flown
+
 FROM
     booking_temp b
 INNER JOIN flight f ON b.flight_id = f.flight_id
 INNER JOIN flightschedule fs ON f.flightno = fs.flightno
-INNER JOIN "public".airport_geo ag ON ag.airport_id = f.from
+INNER JOIN "public".airport_geo agf ON agf.airport_id = f.from
+INNER JOIN "public".airport_geo agt ON agt.airport_id = f.to
 WHERE
     f.airline_id = 107
 
