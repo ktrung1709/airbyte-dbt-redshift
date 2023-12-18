@@ -41,11 +41,21 @@ SELECT
         ELSE 3
     END AS cos_id,
     b.price AS transaction_fee,
+    
+    6371 * 2 * ASIN(SQRT(
+    POWER(SIN((agt.latitude  - agf.latitude ) * pi()/180 / 2), 2) +
+    COS(agf.latitude* pi()/180) * COS( agt.latitude  * pi()/180) *
+    POWER(SIN(( agt.longitude - agf.longitude ) * pi()/180 / 2), 2)
+    )) as miles_flown,
+
     getdate() as updated_at
+
 FROM
     booking_temp b
 INNER JOIN flight f ON b.flight_id = f.flight_id
 INNER JOIN flightschedule fs ON f.flightno = fs.flightno
+INNER JOIN "airport_dwh"."public".airport_geo agf ON agf.airport_id = f.from
+INNER JOIN "airport_dwh"."public".airport_geo agt ON agt.airport_id = f.to
 WHERE
     f.airline_id = 107
 
