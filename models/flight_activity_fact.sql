@@ -64,5 +64,7 @@ WHERE
   ( CAST(f."_ab_cdc_updated_at" AS TIMESTAMP) > (select max(updated_at) from {{ this }})
   or CAST(b."_ab_cdc_updated_at" AS TIMESTAMP) > (select max(updated_at) from {{ this }})
   or CAST(fs."_ab_cdc_updated_at" AS TIMESTAMP) > (select max(updated_at) from {{ this }})
+  or CAST(agf."_ab_cdc_updated_at" AS TIMESTAMP) > (select max(updated_at) from {{ this }})
+  or CAST(agt."_ab_cdc_updated_at" AS TIMESTAMP) > (select max(updated_at) from {{ this }})
   )
 {% endif %}
