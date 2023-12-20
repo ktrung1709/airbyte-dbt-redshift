@@ -8,6 +8,7 @@
 SELECT
     b.booking_id,
     f.flightno,
+    f.airplane_id,
     b.passenger_id,
     f.from AS origin_airport_id,
     f.to AS destination_airport_id,
